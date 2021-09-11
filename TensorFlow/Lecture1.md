@@ -34,7 +34,7 @@ import tensorflow as tf
 
 class MyCallback(tf.keras.callbacks.Callback):
     def onEpochEnd(self, epoch, logs={}):
-        if logs.get('accuracy') >= 0.9:
+        if logs.get('acc') >= 0.9:
             print("\nReached target so cancelling training!")
             self.model.stop_training = True
 
