@@ -5,7 +5,7 @@
 - Machine learning takes results and data in and get the rules.
 - Machine learning is all about a computer learning the patterns that distinguish things
 
-### Basics
+## Basics
 - Keras is an api in tensorflow library
 - we need to define layers, neuron and input shape when we create a neural network
 - when compile a neural network we need to define a loss function and an optimizer
@@ -27,7 +27,7 @@ def house_model(y_new):
     return model.predict(y_new[0])
 ```
 
-### Computer vision
+## Computer vision (Deep Neural Networks)
 ```python
 import tensorflow as tf
 
@@ -53,6 +53,16 @@ model = tf.keras.models.Sequential([
 model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
+# too many epochs might cause Overfitting problem
+# while training accuracy is quite good but bad on the test set
 model.fit(training_images, training_labels, epochs=5, callbacks=[callbacks])
 
 ```
+
+## CNN (Convolutional Neural Networks)
+- Convolution
+    - narrow down the content of the image to focus on specific and distinct details.
+    - caculate the pixel value of current one by use the sum of its neighbors * their weights
+- Pooling
+    - a way of compressing an image
+    - e.g. convert 16 pixels to 4 pixels (by choosing the biggest one in very 2 * 2 square)
