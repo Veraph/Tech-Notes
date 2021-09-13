@@ -134,3 +134,4 @@ plt.plot(epochs, val_loss, 'b', "Validation Loss")
 plt.title('Training and validation loss')
 ```
 
+## Augmentation
