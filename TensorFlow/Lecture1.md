@@ -142,7 +142,7 @@ def train_happy_sad_model():
     class myCallback(tf.keras.callbacks.Callback):
          # Your Code
         def on_epoch_end(self, epoch, log={}):
-            if log.get('acc') > .999:
+            if log.get('acc') > DESIRED_ACCURACY:
                 print("\nReached 99.9% so canceling the training")
                 self.model.stop_training = True
 
