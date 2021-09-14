@@ -57,3 +57,5 @@ label_seq = label_tokenizer.texts_to_sequences(labels)
 print(label_seq)
 print(label_word_index)
 ```
+
+## words embedding
