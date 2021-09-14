@@ -253,3 +253,12 @@ history = model.fit(
             verbose = 2)
 ```
 
+## Multiclass Classfication
+
+```Python
+# The last dense layer should be (if have 3 classes)
+tf.keras.layers.Dense(3, activation='softmax')
+
+# when compile the loss function should be
+loss='categorical_crossentropy'
+```
