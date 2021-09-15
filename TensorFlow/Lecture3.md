@@ -129,7 +129,7 @@ validation_label_seq = np.array(label_tokenizer.texts_to_sequences(validation_la
 model = tf.keras.Sequential([
     tf.keras.layers.Embedding(vocab_size, embedding_dim, input_length=max_length),
     tf.keras.layers.GlobalAveragePooling1D(),
-    tf.keras.layers.Dense(24, activation='relu),
+    tf.keras.layers.Dense(24, activation='relu'),
     tf.keras.layers.Dense(6, activation='softmax')
 ])
 model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
@@ -177,3 +177,8 @@ out_v.close()
 out_m.close()
 #--------------------------------------------------------------------------------
 ```
+
+## RNN (Recurrent Neural Network)
+- Sequence modeling
+    - LSTM Long Short Term Memory
+        - The pipeline context: Cell State (can be bidirectional e.g. later contexts can impact earlier one ) 
