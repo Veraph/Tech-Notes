@@ -183,6 +183,7 @@ out_m.close()
     - LSTM Long Short Term Memory
         - The pipeline context: Cell State (can be bidirectional e.g. later contexts can impact earlier one ) 
         ```Python
+        # validation accuracy of 0.8142 after 10 epochs
         model = tf.keras.Sequential([
             tf.keras.layers.Embedding(vocab_size, embedding_dim, input_length=max_length),
 
@@ -196,7 +197,8 @@ out_m.close()
     - You can also use convolutional network
 
         ```Python
-        
+        # validation accuracy of 0.8192 after 10 epochs
+        # fastest
         model = tf.keras.Sequential([
             tf.keras.layers.Embedding(vocab_size, embedding_dim, input_length=max_length),
             
@@ -209,8 +211,9 @@ out_m.close()
         ```
 
     - The Graded Recurrent Unit(GRU) is also a choice
-
+        
         ```Python
+        # validation accuracy of 0.8056 after 10 epochs
         model = tf.keras.Sequential([
             tf.keras.layers.Embedding(vocab_size, embedding_dim,
             input_length=max_length),
@@ -221,3 +224,36 @@ out_m.close()
             tf.keras.layers.Dense(1, activation='sigmoid')
         ])
         ```
+
+- deal with large data set
+```Python
+model = tf.keras.Sequential([
+    # the additional one for outer words
+    # weights and trainable here because we used transfer learning
+    tf.keras.layers.Embedding(vocab_size+1, embedding_dim, input_length=max_length,
+    weights=[embeddings_matrix], trainable=False)
+    tf.keras.Dropout(0.2), # we usually do this in the transfer learning
+    # the cnn part
+    tf.keras.layers.Conv1D(64, 5, activation='relu'),
+    tf.keras.layers.MaxPooling1D(pool_size=4),
+    
+    tf.keras.layers.LSTM(64),
+    tf.keras.layers.Dense(1, activation='sigmoid')
+])
+
+model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+model.summary
+num_epochs = 10
+history = model.fit(training_padded, training_labels, epochs=num_epochs, 
+validation_data=(testing_padded, testing_labels), verbose=2)
+```
+
+## With literature
+
+### to be noticed
+```Python
+# to keep all but not the last element
+slice1 = list[:,:-1]
+# to only keep the last element
+slice2 = list[:,-1] 
+```
