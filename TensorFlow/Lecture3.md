@@ -182,3 +182,42 @@ out_m.close()
 - Sequence modeling
     - LSTM Long Short Term Memory
         - The pipeline context: Cell State (can be bidirectional e.g. later contexts can impact earlier one ) 
+        ```Python
+        model = tf.keras.Sequential([
+            tf.keras.layers.Embedding(vocab_size, embedding_dim, input_length=max_length),
+
+            tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(32)),
+
+            tf.keras.layers.Dense(24, activation='relu'),
+            tf.keras.layers.Dense(1, activation='sigmoid')
+        ])
+        ```
+
+    - You can also use convolutional network
+
+        ```Python
+        
+        model = tf.keras.Sequential([
+            tf.keras.layers.Embedding(vocab_size, embedding_dim, input_length=max_length),
+            
+            tf.keras.layers.Conv1D(128, 5, activation='relu'),
+            tf.keras.layers.GlobalMaxPooling1D(),
+
+            tf.keras.layers.Dense(24, activation='relu'),
+            tf.keras.layers.Dense(1, activation='sigmoid')
+        ])
+        ```
+
+    - The Graded Recurrent Unit(GRU) is also a choice
+
+        ```Python
+        model = tf.keras.Sequential([
+            tf.keras.layers.Embedding(vocab_size, embedding_dim,
+            input_length=max_length),
+
+            tf.keras.layers.Biderectional(tf.keras.GRU(32)),
+
+            tf.keras.layers.Dense(24, activation='relu),
+            tf.keras.layers.Dense(1, activation='sigmoid')
+        ])
+        ```
