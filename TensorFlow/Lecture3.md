@@ -236,7 +236,7 @@ model = tf.keras.Sequential([
     # the cnn part
     tf.keras.layers.Conv1D(64, 5, activation='relu'),
     tf.keras.layers.MaxPooling1D(pool_size=4),
-    
+
     tf.keras.layers.LSTM(64),
     tf.keras.layers.Dense(1, activation='sigmoid')
 ])
@@ -256,4 +256,19 @@ validation_data=(testing_padded, testing_labels), verbose=2)
 slice1 = list[:,:-1]
 # to only keep the last element
 slice2 = list[:,-1] 
+```
+
+```Python
+# The points to increase the performance of network
+model = Sequential()
+# can change the embedding_dim (now is 100)
+model.add(Embedding(total_words, 100, input_length=max_sequence_len-1))
+# can change the LSTM number
+model.add(Bidirectional(LSTM(150)))
+model.add(Dense(total_words, activation='softmax'))
+# can change the optimizer (learning rate and algorithm)
+adam = Adam(lr=0.01)
+model.compile(loss='categorical_crossentropy', optimizer=adam, metrics=['accuracy'])
+history = model.fit(xs, ys, epochs=100, verbose=1)
+
 ```
