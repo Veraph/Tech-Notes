@@ -202,6 +202,8 @@ out_m.close()
         model = tf.keras.Sequential([
             tf.keras.layers.Embedding(vocab_size, embedding_dim, input_length=max_length),
             
+            # The output shape will be (None, 116, 128)
+            # there has 128 filters
             tf.keras.layers.Conv1D(128, 5, activation='relu'),
             tf.keras.layers.GlobalMaxPooling1D(),
 
