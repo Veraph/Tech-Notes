@@ -301,4 +301,6 @@ corpus = data.lower().split("\n")
 
 tokenizer.fit_on_texts(corpus)
 total_words = len(tokenizer.word_index) + 1
+
+# todo
 ```
