@@ -274,3 +274,31 @@ model.compile(loss='categorical_crossentropy', optimizer=adam, metrics=['accurac
 history = model.fit(xs, ys, epochs=100, verbose=1)
 
 ```
+
+### work with regularizers
+
+```Python
+# The job with Shakespeare
+## Import stuffs
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.layers import Embedding, LSTM, Dense, Dropout, Bidirectional
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.optimizers import Adam
+# allow you to apply penalties on layer parameters or layer activity
+# during optimization. These penalties are summed into the loss function that the network optimizes.
+from tensorflow.keras import regularizers
+
+# provide some general functions
+import tensorflow.keras.utils as ku
+import numpy as np
+#--------------------------------------------------------------------
+# process the data
+tokenizer = Tokenizer()
+
+data = open('path').read()
+corpus = data.lower().split("\n")
+
+tokenizer.fit_on_texts(corpus)
+total_words = len(tokenizer.word_index) + 1
+```
